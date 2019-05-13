@@ -1,41 +1,49 @@
-fetch(
-	'https://cors-anywhere.herokuapp.com/https://api.giphy.com/v1/stickers/packs/3138/stickers?api_key=Q8RT1iMLKWXIsjwgkbtCDU9er93iFvln&limit=25&offset=0'
-)
-	.then(response => response.json())
-	.then(rawdata => (data = rawdata.data));
-
+var input = document.querySelector('input');
 var gif = document.querySelector('img');
 var button = document.getElementById('button');
-var input = document.querySelector('input');
 
 button.addEventListener('click', function() {
 	event.preventDefault();
-	let gifTitles = data.map(gif => gif.title);
-	let gifUrls = data.map(gif => gif.images.fixed_width_small.url);
-	let searchKeyword = input.value.toLowerCase();
-	let regex = new RegExp(searchKeyword, 'g');
+	console.log(
+		'http://api.giphy.com/v1/gifs/search?q=' +
+			input.value +
+			'&api_key=Q8RT1iMLKWXIsjwgkbtCDU9er93iFvln&limit=5'
+	);
+	fetch(
+		'https://cors-anywhere.herokuapp.com/http://api.giphy.com/v1/gifs/search?q=' +
+			input.value +
+			'&api_key=Q8RT1iMLKWXIsjwgkbtCDU9er93iFvln&limit=5'
+	)
+		.then(response => response.json())
+		.then(rawdata => {
+			let data = rawdata.data;
+			let gifTitles = data.map(gif => gif.title);
+			let gifUrls = data.map(gif => gif.images.downsized.url);
+			let searchKeyword = input.value.toLowerCase();
+			let regex = new RegExp(searchKeyword, 'g');
 
-	for (let i = 0; i < gifTitles.length; i++) {
-		if (gifTitles[i].toLowerCase().match(regex)) {
-			gif.src = gifUrls[i];
-		}
-	}
-});
-
-input.addEventListener('keyup', function(e) {
-	if (e.keyCode === 13) {
-		let gifTitles = data.map(gif => gif.title);
-		let gifUrls = data.map(gif => gif.images.fixed_width_small.url);
-		let searchKeyword = input.value.toLowerCase();
-		let regex = new RegExp(searchKeyword, 'g');
-
-		for (let i = 0; i < gifTitles.length; i++) {
-			if (gifTitles[i].toLowerCase().match(regex)) {
-				gif.src = gifUrls[i];
+			for (let i = 0; i < gifTitles.length; i++) {
+				if (gifTitles[i].toLowerCase().match(regex)) {
+					gif.src = gifUrls[i];
+				}
 			}
-		}
-	}
+		});
 });
+
+// input.addEventListener('keyup', function(e) {
+// 	if (e.keyCode === 13) {
+// 		let gifTitles = data.map(gif => gif.title);
+// 		let gifUrls = data.map(gif => gif.images.fixed_width_small.url);
+// 		let searchKeyword = input.value.toLowerCase();
+// 		let regex = new RegExp(searchKeyword, 'g');
+
+// 		for (let i = 0; i < gifTitles.length; i++) {
+// 			if (gifTitles[i].toLowerCase().match(regex)) {
+// 				gif.src = gifUrls[i];
+// 			}
+// 		}
+// 	}
+// });
 
 var keywords = [
 	'cloud',

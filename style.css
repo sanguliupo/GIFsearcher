@@ -3,36 +3,8 @@
 	justify-content: center;
 }
 
-.bounding-box {
-	border: 1px solid #000;
-	position: fixed;
-	top: 100px;
-	bottom: 100px;
-	left: 200px;
-	right: 200px;
-}
-
-.bounding-box2 {
-	border: 1px solid #aaa000;
-	position: fixed;
-	top: 150px;
-	bottom: 150px;
-	left: 300px;
-	right: 300px;
-}
-
 .names {
 	display: flex;
-}
-
-input {
-	margin: 9px;
-	padding: 5px;
-}
-
-label {
-	font-size: 12px;
-	font-family: Arial;
 }
 
 * {
@@ -51,11 +23,9 @@ input {
 	background-color: #f1f1f1;
 	padding: 10px;
 	font-size: 16px;
-}
-input[type='text'] {
-	background-color: #f1f1f1;
 	width: 100%;
 }
+
 button {
 	background-color: DodgerBlue;
 	color: #fff;
