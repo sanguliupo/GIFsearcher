@@ -20,18 +20,6 @@
 	left: 300px;
 	right: 300px;
 }
-/*.header {
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-}*/
-
-.inputInfo {
-	display: flex;
-	flex-direction: column;
-	width: 300px;
-	margin: 10px;
-}
 
 .names {
 	display: flex;
@@ -68,9 +56,13 @@ input[type='text'] {
 	background-color: #f1f1f1;
 	width: 100%;
 }
-input[type='submit'] {
+button {
 	background-color: DodgerBlue;
 	color: #fff;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid transparent;
+	margin: 10px;
 }
 .autocomplete-items {
 	position: absolute;

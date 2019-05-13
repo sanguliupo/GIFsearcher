@@ -22,7 +22,38 @@ button.addEventListener('click', function() {
 	}
 });
 
-var keywords = ['cloud', 'mad', 'wink', 'thumbs', 'dance', 'burger', 'happy'];
+input.addEventListener('keyup', function(e) {
+	if (e.keyCode === 13) {
+		let gifTitles = data.map(gif => gif.title);
+		let gifUrls = data.map(gif => gif.images.fixed_width_small.url);
+		let searchKeyword = input.value.toLowerCase();
+		let regex = new RegExp(searchKeyword, 'g');
+
+		for (let i = 0; i < gifTitles.length; i++) {
+			if (gifTitles[i].toLowerCase().match(regex)) {
+				gif.src = gifUrls[i];
+			}
+		}
+	}
+});
+
+var keywords = [
+	'cloud',
+	'mad',
+	'wink',
+	'thumbs',
+	'dance',
+	'burger',
+	'happy',
+	'party',
+	'ugh',
+	'morning',
+	'cat',
+	'funny',
+	'mic',
+	'smile',
+	'waving'
+];
 
 function autocomplete(inp, arr) {
 	/*the autocomplete function takes two arguments,
@@ -32,7 +63,6 @@ function autocomplete(inp, arr) {
 	inp.addEventListener('input', function(e) {
 		var a,
 			b,
-			i,
 			val = this.value;
 		/*close any already open lists of autocompleted values*/
 		closeAllLists();
@@ -47,7 +77,7 @@ function autocomplete(inp, arr) {
 		/*append the DIV element as a child of the autocomplete container:*/
 		this.parentNode.appendChild(a);
 		/*for each item in the array...*/
-		for (i = 0; i < arr.length; i++) {
+		for (let i = 0; i < arr.length; i++) {
 			/*check if the item starts with the same letters as the text field value:*/
 			if (
 				arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()
@@ -130,4 +160,4 @@ function autocomplete(inp, arr) {
 	});
 }
 
-autocomplete(document.getElementById('myInput'), keywords);
+autocomplete(input, keywords);
