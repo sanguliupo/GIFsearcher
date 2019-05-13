@@ -1,6 +1,3 @@
-// let data = [];
-src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js';
-
 fetch(
 	'https://cors-anywhere.herokuapp.com/https://api.giphy.com/v1/stickers/packs/3138/stickers?api_key=Q8RT1iMLKWXIsjwgkbtCDU9er93iFvln&limit=25&offset=0'
 )
@@ -12,6 +9,7 @@ var button = document.getElementById('button');
 var input = document.querySelector('input');
 
 button.addEventListener('click', function() {
+	event.preventDefault();
 	let gifTitles = data.map(gif => gif.title);
 	let gifUrls = data.map(gif => gif.images.fixed_width_small.url);
 	let searchKeyword = input.value.toLowerCase();
