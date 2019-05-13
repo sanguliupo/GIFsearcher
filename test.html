@@ -11,15 +11,22 @@
 			<div class="header">
 				<h1>Fetch GIF</h1>
 			</div>
+			<form autocomplete="off" action="/action_page.php">
+				<div class="autocomplete" style="width:300px;">
+					<input
+						id="myInput"
+						type="text"
+						name="myCountry"
+						placeholder="keyword"
+					/>
+				</div>
+				<input type="submit" />
+			</form>
 
 			<div class="inputInfo">
-				<div class="names">
-					<label>Search keyword</label>
-					<input
-						class="typeahead"
-						type="text"
-						placeholder="keywords"
-					/>
+			<!-- 	<div class="names">
+					<label>Search keyword</label> -->
+					
 					<button id="button">Search</button>
 				</div>
 			</div>
