@@ -10,20 +10,12 @@ function searchGIF(){
 		)
 			.then(response => response.json())
 			.then(rawdata => {
-				let data = rawdata.data;
-				let gifTitles = data.map(gif => gif.title);
-				let gifUrls = data.map(gif => gif.images.original.url);
-				let searchKeyword = input.value.toLowerCase();
-				let regex = new RegExp(searchKeyword, 'g');
+				let gifUrls = rawdata.data.map(gif => gif.images.original.url);
+				console.log(gifUrls)
+				gif.src = gifUrls[1];
 
-				for (let i = 0; i < gifTitles.length; i++) {
-					if (gifTitles[i].toLowerCase().match(regex)) {
-						gif.src = gifUrls[i];
-					}
-				}
 			});
 }
-
 
 input.addEventListener('keyup', function(e) {
 	if (e.keyCode === 13){
@@ -52,6 +44,8 @@ var keywords = [
 	'cat',
 	'funny',
 	'mic',
+	'makeup',
+	'madeline',
 	'smile',
 	'waving'
 ];
