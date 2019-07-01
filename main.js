@@ -2,48 +2,41 @@ var input = document.querySelector('input');
 var gif = document.querySelector('img');
 var button = document.getElementById('button');
 
-button.addEventListener('click', function() {
-	event.preventDefault();
-	console.log(
-		'http://api.giphy.com/v1/gifs/search?q=' +
-			input.value +
-			'&api_key=Q8RT1iMLKWXIsjwgkbtCDU9er93iFvln&limit=5'
-	);
-	fetch(
-		'https://cors-anywhere.herokuapp.com/http://api.giphy.com/v1/gifs/search?q=' +
-			input.value +
-			'&api_key=Q8RT1iMLKWXIsjwgkbtCDU9er93iFvln&limit=5'
-	)
-		.then(response => response.json())
-		.then(rawdata => {
-			let data = rawdata.data;
-			let gifTitles = data.map(gif => gif.title);
-			let gifUrls = data.map(gif => gif.images.downsized.url);
-			let searchKeyword = input.value.toLowerCase();
-			let regex = new RegExp(searchKeyword, 'g');
+function searchGIF(){
+		fetch(
+			'https://cors-anywhere.herokuapp.com/http://api.giphy.com/v1/gifs/search?q=' +
+				input.value +
+				'&api_key=Q8RT1iMLKWXIsjwgkbtCDU9er93iFvln&limit=5'
+		)
+			.then(response => response.json())
+			.then(rawdata => {
+				let data = rawdata.data;
+				let gifTitles = data.map(gif => gif.title);
+				let gifUrls = data.map(gif => gif.images.original.url);
+				let searchKeyword = input.value.toLowerCase();
+				let regex = new RegExp(searchKeyword, 'g');
 
-			for (let i = 0; i < gifTitles.length; i++) {
-				if (gifTitles[i].toLowerCase().match(regex)) {
-					gif.src = gifUrls[i];
+				for (let i = 0; i < gifTitles.length; i++) {
+					if (gifTitles[i].toLowerCase().match(regex)) {
+						gif.src = gifUrls[i];
+					}
 				}
-			}
-		});
+			});
+}
+
+
+input.addEventListener('keyup', function(e) {
+	if (e.keyCode === 13){
+		searchGIF()
+	}	
 });
 
-// input.addEventListener('keyup', function(e) {
-// 	if (e.keyCode === 13) {
-// 		let gifTitles = data.map(gif => gif.title);
-// 		let gifUrls = data.map(gif => gif.images.fixed_width_small.url);
-// 		let searchKeyword = input.value.toLowerCase();
-// 		let regex = new RegExp(searchKeyword, 'g');
+button.addEventListener('click', function(e){
+	e.preventDefault();
+	searchGIF();
+})
 
-// 		for (let i = 0; i < gifTitles.length; i++) {
-// 			if (gifTitles[i].toLowerCase().match(regex)) {
-// 				gif.src = gifUrls[i];
-// 			}
-// 		}
-// 	}
-// });
+//starting here is autocomplete
 
 var keywords = [
 	'cloud',
